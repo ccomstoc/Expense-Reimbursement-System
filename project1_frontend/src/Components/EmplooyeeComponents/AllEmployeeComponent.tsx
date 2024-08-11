@@ -3,10 +3,36 @@ import { Button, Table } from "react-bootstrap"
 import { EmployeeInterface } from "../../Interfaces/EmployeeInterface"
 import axios from "axios"
 import userEvent from "@testing-library/user-event"
+import { useNavigate } from "react-router-dom"
 
 export const AllEmployeeComponent:React.FC = () =>{
 
     const [employees,setEmployees] = useState<EmployeeInterface[]>([])
+    const [loggedInEmp, setLoggedInEmp] = useState<EmployeeInterface>()
+    const navigate = useNavigate()
+
+    useEffect(()=>{//Sync state with currently stored logged in user
+        const storedUser = localStorage.getItem('loggedInUser')
+        console.log("THIS")
+        console.log(localStorage.getItem('loggedInUser'))
+        if(storedUser){
+            let emp:EmployeeInterface = JSON.parse(storedUser)
+            if(emp == null){
+                setLoggedInEmp(undefined)
+                navigate("/login")
+            }
+            else{
+                setLoggedInEmp(emp)
+                console.log("aaa" + loggedInEmp?.role)
+                if(emp.role != 'manager')
+                    navigate("/reimbursement")
+            }
+                
+
+        } else{
+            navigate("/login")
+        }
+    },[])
 
     useEffect(() =>{
         getEmployeeList()
@@ -61,6 +87,7 @@ export const AllEmployeeComponent:React.FC = () =>{
     return(
 
         <div>
+            {loggedInEmp == undefined ? <>{navigate("/login")}</> : <></>}
             <Table>
                 <thead>
                     <tr>

@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {Button} from 'react-bootstrap'
 import { NavBarComponent } from './Components/NavBarComponent';
 import { LoginComponent } from './Components/LoginComponent';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, redirect, useNavigate } from 'react-router-dom';
 import { AllEmployeeComponent } from './Components/EmplooyeeComponents/AllEmployeeComponent';
 import { AllReimbContainerComp } from './Components/ReimbursementComponents/AllReimbContainerComp';
 import { AllReimbsComponent } from './Components/ReimbursementComponents/AllReimbsComponent';
 import { store } from './GlobalData/store';
+import { EmployeeInterface } from './Interfaces/EmployeeInterface';
 
 function App() {
 
+  
 
   //Im thinking here we can conditionaly render login component or 'main', which will have nav bar
   //Im not super its super important that main be a functional component tho, so i may do it here
@@ -21,12 +23,10 @@ function App() {
         <BrowserRouter>
           <Routes>
             
-            {/*<Route path = "" element = {<LoginComponent></LoginComponent>}/>*/}
-            <Route path = "" element = {<LoginComponent></LoginComponent>}/>
+            <Route path = "/login" element = {<LoginComponent></LoginComponent>}/>
+            
             <Route path = "/employee" element = {   
                     <div>
-                      
-                      {store.loggedInUser.employeeId != -1 ? <></> : <>-1</>}
                       <NavBarComponent></NavBarComponent>
                       <AllEmployeeComponent></AllEmployeeComponent>
                     </div>

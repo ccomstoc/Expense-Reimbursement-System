@@ -68,11 +68,11 @@ export const LoginComponent:React.FC = () => {
                 //depending on the user's role value, send them to one of two components
                 if(response.data.role === "employee"){
                     //use our useNavigate hook to switch views to the Car Container Component
-                    navigate("/employee")
+                    navigate("/reimbursement")
                 } 
 
                 if(response.data.role === "manager"){
-                    navigate("/reimbursement")
+                    navigate("/employee")
                 }
                 
             }
