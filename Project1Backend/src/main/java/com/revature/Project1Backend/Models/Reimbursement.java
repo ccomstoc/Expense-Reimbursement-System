@@ -11,7 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "reimbursements")
 @Component
-public class Reimbursement {
+public class Reimbursement implements Comparable<Reimbursement>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -118,5 +118,10 @@ public class Reimbursement {
     @Override
     public int hashCode() {
         return Objects.hash(reimbId, description, amount, status, employee, employeeId);
+    }
+
+    @Override
+    public int compareTo(Reimbursement reimb) {
+        return Integer.compare(reimbId, reimb.reimbId);
     }
 }

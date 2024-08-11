@@ -14,6 +14,7 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/employee")
+@CrossOrigin
 public class EmployeeController {
 
     private EmployeeService eService;

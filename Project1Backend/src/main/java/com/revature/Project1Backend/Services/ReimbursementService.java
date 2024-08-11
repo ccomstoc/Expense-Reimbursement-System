@@ -8,6 +8,7 @@ import com.revature.Project1Backend.Models.Reimbursement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,11 +38,16 @@ public class ReimbursementService {
     }
 
     public List<Reimbursement> getAllReimbursement(){
-        return rDAO.findAll();
+        List<Reimbursement> sortedReimbList =  rDAO.findAll();
+        Collections.sort(sortedReimbList);
+        return sortedReimbList;
     }
 
     public List<Reimbursement> getAllReimbursementsByStatus(String status){
-        return rDAO.findByStatus(status);
+        List<Reimbursement> sortedReimbList =  rDAO.findByStatus(status);
+        Collections.sort(sortedReimbList);
+        return sortedReimbList;
+
     }
 
     public List<Reimbursement> getAllReimbursementsByUserId(int userId){

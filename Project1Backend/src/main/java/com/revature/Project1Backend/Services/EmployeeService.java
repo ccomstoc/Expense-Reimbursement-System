@@ -8,6 +8,7 @@ import com.revature.Project1Backend.Models.Reimbursement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +27,10 @@ public class EmployeeService {
     }
 
     public List<Employee> getAllUsers(){
+        List<Employee> sortedEmps = eDAO.findAll();
+        Collections.sort(sortedEmps);
+        return sortedEmps;
 
-        return eDAO.findAll();
     }
     public Employee getEmployeeById(int id){
         Optional<Employee> optionalEmp = eDAO.findById(id);

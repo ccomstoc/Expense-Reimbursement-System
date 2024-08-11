@@ -1,6 +1,7 @@
 package com.revature.Project1Backend.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "employees")
 @Component
-public class Employee {
+public class Employee implements Comparable<Employee> {
 
 
     @Id
@@ -26,6 +27,7 @@ public class Employee {
     private String username;
 
     @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(nullable = false)
@@ -120,4 +122,10 @@ public class Employee {
     public int hashCode() {
         return Objects.hash(employeeId, firstName, lastName, username, password, role);
     }
+
+    @Override
+    public int compareTo(Employee employee) {
+        return Integer.compare(employeeId, employee.employeeId);
+    }
 }
+
