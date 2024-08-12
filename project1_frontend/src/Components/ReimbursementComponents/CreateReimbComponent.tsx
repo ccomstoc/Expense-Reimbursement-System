@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { EmployeeInterface } from "../../Interfaces/EmployeeInterface"
 import { getDecorators } from "typescript"
 import axios from "axios"
+import { Button, Card, Container, Form, InputGroup } from "react-bootstrap"
 
 export const CreateReimbComponent:React.FC = () =>{
 
@@ -56,12 +57,45 @@ export const CreateReimbComponent:React.FC = () =>{
 
     return(
 
-        <div> 
-            <label htmlFor="desc">Description</label>
-            <input type="text" name="desc" placeholder="Enter Description" onChange = {syncFormData}/>
-            <label htmlFor="amount">Amount</label>
-            <input type="number" name = "ammount" placeholder="Enter Ammount:"onChange = {syncFormData}/>
-            <button onClick = {createReimbursement}>Create Reimbursement</button>
+        <div>
+
+            <Container>
+                
+                <div className="d-flex align-items-center  
+                justify-content-center vh-100">
+                    
+                    <Card style={{ width: '30rem' }}>
+                        <h1 >Create Reimbursement</h1>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="inputGroup-sizing-default" >
+                                Description
+                            </InputGroup.Text>
+                            <Form.Control
+                                name="desc"
+                                placeholder="Enter Description"
+                                onChange = {syncFormData}
+                                aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default"
+                            />
+                        </InputGroup>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="inputGroup-sizing-default" >
+                                Amount
+                            </InputGroup.Text>
+                            <Form.Control
+                                type="number"
+                                name = "ammount"
+                                placeholder="Enter Ammount:"
+                                onChange = {syncFormData}
+                                aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default"
+                            />
+                        </InputGroup>
+                        <Button variant="secondary" onClick = {createReimbursement}>Create Reimbursement</Button>{' '}
+
+                    </Card>
+                </div>
+            </Container>
         </div>
 
     )

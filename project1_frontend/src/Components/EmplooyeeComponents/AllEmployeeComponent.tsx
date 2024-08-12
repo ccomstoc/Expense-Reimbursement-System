@@ -50,7 +50,9 @@ export const AllEmployeeComponent:React.FC = () =>{
         if(confirmed){
             axios.delete("http://localhost:8080/employee/" + id)
            getEmployeeList()
+           window.location.reload();
         }
+        
         
     }
 
@@ -83,7 +85,7 @@ export const AllEmployeeComponent:React.FC = () =>{
 
         <div>
             {loggedInEmp == undefined ? <>{navigate("/login")}</> : <></>}
-            <Table>
+            <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>ID</th>

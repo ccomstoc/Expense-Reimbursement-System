@@ -37,7 +37,7 @@ export const NavBarComponent:React.FC = () => {
 
     return(
         <Navbar bg="dark" data-bs-theme="dark">
-        <Container>
+
           {/*<Navbar.Brand href="/hi">Home</Navbar.Brand>*/}
           <Nav className="me-auto">
             {loggedInEmp?.role == "manager" ? <>
@@ -53,7 +53,7 @@ export const NavBarComponent:React.FC = () => {
             </> : <></>} 
           </Navbar.Text>
         </Navbar.Collapse>
-        </Container>
+
       </Navbar>
     )
 

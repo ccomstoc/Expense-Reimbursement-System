@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { ReimbursementInterface } from "../../Interfaces/ReimbursementInterface"
 import axios from "axios"
-import { Table } from "react-bootstrap"
+import { Container, Table } from "react-bootstrap"
 
 
 export const AllReimbsComponent:React.FC<any> = ({onlyPending}) =>{
@@ -26,11 +26,6 @@ export const AllReimbsComponent:React.FC<any> = ({onlyPending}) =>{
         })
         //window.location.reload()
         getReimbursementList()
-
-        
-        
-
-
 
     }
 
@@ -60,7 +55,7 @@ export const AllReimbsComponent:React.FC<any> = ({onlyPending}) =>{
     return(
 
         <div>
-            <Table>
+            <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>ID</th>

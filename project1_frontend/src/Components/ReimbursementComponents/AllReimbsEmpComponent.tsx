@@ -70,7 +70,7 @@ export const AllReimbsEmpComponent:React.FC<any> = ({onlyPending,emp}) =>{
     return(
 
         <div>
-            <Table>
+            <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>ID</th>

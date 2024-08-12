@@ -3,6 +3,7 @@ import { AllReimbsComponent } from "./AllReimbsComponent"
 import { useNavigate } from "react-router-dom"
 import { EmployeeInterface } from "../../Interfaces/EmployeeInterface"
 import { AllReimbsEmpComponent } from "./AllReimbsEmpComponent"
+import { Button, Form } from "react-bootstrap"
 
 
 export const AllReimbContainerComp:React.FC = () => {
@@ -42,12 +43,15 @@ export const AllReimbContainerComp:React.FC = () => {
 
     return(
         <div>
-            <p>Show only pending?</p>
-            <input
-                type="checkbox"
-                checked={onlyPending}
+
+            <Form>
+                <Form.Check // prettier-ignore
+                type="switch"
+                id="custom-switch"
+                label="Show Only Pedning"
                 onChange={updateCheckbox}
-            />
+                />
+            </Form>
 
             {loggedInEmp?.role == 'employee' ? 
             <>

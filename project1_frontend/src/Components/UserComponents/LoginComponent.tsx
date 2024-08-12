@@ -83,22 +83,25 @@ export const LoginComponent:React.FC = () => {
 
 
     return(
-        <div className="login">
-            <div className="text-container">
+        <Container>
+            <div >
+                <div className="text-container">
+                    <h1>Log In</h1>
+                    <div className="input-container">
+                        <input type="text" placeholder="username" name="username" onChange={storeValues}/>
+                    </div>
 
-                <div className="input-container">
-                    <input type="text" placeholder="username" name="username" onChange={storeValues}/>
+                    <div className="input-container">
+                        <input type="password" placeholder="password" name="password" onChange={storeValues}/>
+                    </div>
+
+                    <Button className="login-button" variant="dark" onClick={login}>Login</Button>
+                    <Button className="login-button" variant="dark" onClick={() => navigate("/register")}>Create Account</Button>
+
                 </div>
 
-                <div className="input-container">
-                    <input type="password" placeholder="password" name="password" onChange={storeValues}/>
-                </div>
-
-                <button className="login-button" onClick={login}>Login</button>
-                <button className="login-button" onClick={() => navigate("/register")}>Create Account</button>
             </div>
-
-        </div>
+        </Container>
 
     )
 }

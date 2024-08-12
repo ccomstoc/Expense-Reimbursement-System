@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
 import { ReimbursementInterface } from "../../Interfaces/ReimbursementInterface";
 import axios from "axios";
+import { Button, Card, Container, Form, InputGroup } from "react-bootstrap";
 
 export const EditReimbComponent = () =>{
 
@@ -60,12 +61,44 @@ export const EditReimbComponent = () =>{
     return(
 
         <div>
-            <label htmlFor="desc">Description</label>
-            <input type="text" name="desc" placeholder={reimb?.description} onChange = {syncFormData}/>
-            <label htmlFor="amount">Amount</label>
-            <input type="number" name = "ammount" placeholder={String(reimb?.amount)}  onChange = {syncFormData}/>
-            <button onClick = {updateReimbursement}>Update Reimbursement</button>
 
+            <Container>
+                
+                <div className="d-flex align-items-center  
+                justify-content-center vh-100">
+                    
+                    <Card style={{ width: '30rem' }}>
+                        <h1 >Edit Reimbursement</h1>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="inputGroup-sizing-default" >
+                                Description
+                            </InputGroup.Text>
+                            <Form.Control
+                                name="desc"
+                                placeholder={reimb?.description}
+                                onChange = {syncFormData}
+                                aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default"
+                            />
+                        </InputGroup>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="inputGroup-sizing-default" >
+                                Amount
+                            </InputGroup.Text>
+                            <Form.Control
+                                name="amount"
+                                placeholder={String(reimb?.amount)}
+                                onChange = {syncFormData}
+                                aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default"
+                            />
+                        </InputGroup>
+                        <Button variant="secondary" onClick = {updateReimbursement}>Update Reimbursement</Button>{' '}
+
+                    </Card>
+                </div>
+            </Container>
+            
 
 
         </div>
