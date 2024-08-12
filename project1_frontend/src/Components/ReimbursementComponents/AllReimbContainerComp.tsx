@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { AllReimbsComponent } from "./AllReimbsComponent"
 import { useNavigate } from "react-router-dom"
 import { EmployeeInterface } from "../../Interfaces/EmployeeInterface"
+import { AllReimbsEmpComponent } from "./AllReimbsEmpComponent"
 
 
 export const AllReimbContainerComp:React.FC = () => {
@@ -45,15 +46,20 @@ export const AllReimbContainerComp:React.FC = () => {
 
     return(
         <div>
-               {loggedInEmp?.role == 'employee' ? <>YEAAAAA</> : <>
-                <p>Show only pending?</p>
-                    <input
-                        type="checkbox"
-                        checked={onlyPending}
-                        onChange={updateCheckbox}
-                    />
-                    <AllReimbsComponent onlyPending ={onlyPending}></AllReimbsComponent>
-               </>}
+            <p>Show only pending?</p>
+            <input
+                type="checkbox"
+                checked={onlyPending}
+                onChange={updateCheckbox}
+            />
+
+            {loggedInEmp?.role == 'employee' ? 
+            <>
+                <AllReimbsEmpComponent onlyPending ={onlyPending} emp={loggedInEmp}></AllReimbsEmpComponent>
+            
+            </> : <>
+                <AllReimbsComponent onlyPending ={onlyPending}></AllReimbsComponent>
+            </>}
                 
         </div>
     )

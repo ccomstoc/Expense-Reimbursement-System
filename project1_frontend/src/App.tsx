@@ -10,6 +10,7 @@ import { AllReimbContainerComp } from './Components/ReimbursementComponents/AllR
 import { AllReimbsComponent } from './Components/ReimbursementComponents/AllReimbsComponent';
 import { store } from './GlobalData/store';
 import { EmployeeInterface } from './Interfaces/EmployeeInterface';
+import { CreateReimbComponent } from './Components/ReimbursementComponents/CreateReimbComponent';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
     <div>
         <BrowserRouter>
           <Routes>
+          <Route path = "/createReimb" element = {<CreateReimbComponent></CreateReimbComponent>}/>
             
             <Route path = "/login" element = {<LoginComponent></LoginComponent>}/>
             

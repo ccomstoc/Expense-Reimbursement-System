@@ -56,12 +56,6 @@ export const LoginComponent:React.FC = () => {
 
                 localStorage.setItem('loggedInUser', JSON.stringify(response.data))
 
-                let userObject
-                const storedUser = localStorage.getItem('loggedInUser');
-                if(storedUser)
-                userObject = JSON.parse(storedUser);
-                console.log("In Login")
-                console.log(storedUser)
 
                 alert("Welcome, " + store.loggedInUser.username)
 
