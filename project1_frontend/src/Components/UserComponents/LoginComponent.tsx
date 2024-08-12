@@ -2,9 +2,9 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
-import { store } from "../GlobalData/store"
-import './ComponentCss/Login.css';
-import { useStore } from '../StoreProvider';
+import { store } from "../../GlobalData/store"
+import '../ComponentCss/Login.css';
+import { useStore } from '../../StoreProvider';
 
 
 export const LoginComponent:React.FC = () => {
@@ -51,9 +51,6 @@ export const LoginComponent:React.FC = () => {
 
                 //Save the incoming user data in our global state (store.ts in the globalData folder)
                 store.loggedInUser = response.data
-                console.log("stored")
-                console.log(store.loggedInUser)
-
                 localStorage.setItem('loggedInUser', JSON.stringify(response.data))
 
 
@@ -74,7 +71,7 @@ export const LoginComponent:React.FC = () => {
         .catch(
             (error) => {
                 console.log(error)
-                alert("Login failed! Try again and do better next timea")
+                alert("Login failed!")
             }
         )
 

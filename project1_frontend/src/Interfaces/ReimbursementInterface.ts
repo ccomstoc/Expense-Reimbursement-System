@@ -1,6 +1,6 @@
 export interface ReimbursementInterface{
-    "reimbId":string,
-    "description"?:string,
+    "reimbId":number,
+    "description":string,
     "amount":number,
     "status":string,
     "employee": {

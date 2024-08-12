@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import {Button} from 'react-bootstrap'
 import { NavBarComponent } from './Components/NavBarComponent';
-import { LoginComponent } from './Components/LoginComponent';
+import { LoginComponent } from './Components/UserComponents/LoginComponent';
 import { BrowserRouter, Route, Routes, redirect, useNavigate } from 'react-router-dom';
 import { AllEmployeeComponent } from './Components/EmplooyeeComponents/AllEmployeeComponent';
 import { AllReimbContainerComp } from './Components/ReimbursementComponents/AllReimbContainerComp';
@@ -11,6 +11,8 @@ import { AllReimbsComponent } from './Components/ReimbursementComponents/AllReim
 import { store } from './GlobalData/store';
 import { EmployeeInterface } from './Interfaces/EmployeeInterface';
 import { CreateReimbComponent } from './Components/ReimbursementComponents/CreateReimbComponent';
+import { EditReimbComponent } from './Components/ReimbursementComponents/EditReimbComponent';
+import { CreateAccountComponent } from './Components/UserComponents/CreateAccountComponent';
 
 function App() {
 
@@ -23,6 +25,8 @@ function App() {
     <div>
         <BrowserRouter>
           <Routes>
+          <Route path = "/register" element = {<CreateAccountComponent></CreateAccountComponent>}/>
+          <Route path = "/editReimb" element = {<EditReimbComponent></EditReimbComponent>}/>
           <Route path = "/createReimb" element = {<CreateReimbComponent></CreateReimbComponent>}/>
             
             <Route path = "/login" element = {<LoginComponent></LoginComponent>}/>

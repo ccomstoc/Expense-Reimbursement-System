@@ -47,10 +47,21 @@ public class ReimbursementController {
     public ResponseEntity<Reimbursement> createUser(@RequestBody Reimbursement reimb){
         return ResponseEntity.status(201).body(rService.createReimb(reimb));
 
-    }//westfeild
+    }
     @PatchMapping("/{field}")
     public ResponseEntity<Reimbursement> updateDescription(@RequestBody Reimbursement reimb, @PathVariable String field){
         return ResponseEntity.ok(rService.updateReimb(reimb, field));
+    }
+
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Object> deleteReimbursement(@PathVariable int id){
+        rService.deleteReimbursement(id);
+        return ResponseEntity.status(204).body(null);
+    }
+    @PutMapping
+    public ResponseEntity<Reimbursement> putReimbursement(@RequestBody Reimbursement reimb){
+        return ResponseEntity.ok(rService.putReimbursement(reimb));
     }
 
 

@@ -12,36 +12,32 @@ export const AllReimbContainerComp:React.FC = () => {
     const [loggedInEmp, setLoggedInEmp] = useState<EmployeeInterface>()
     const navigate = useNavigate()
 
-    useEffect(()=>{//Sync state with currently stored logged in user
-        const storedUser = localStorage.getItem('loggedInUser');
-        
-        if(storedUser){
-            let emp = JSON.parse(storedUser)
-            if(emp == ""){
-                setLoggedInEmp(undefined)
-                navigate("/login")
-            }
-            else{
-                setLoggedInEmp(emp)
-            }
+    useEffect(()=>{
+        syncLoggedInUser()
+    },[])
 
-            
-                
-        } else{
+    const syncLoggedInUser = ()=>{//Sync state with logged in user data, and manage access 
+        const storedUser = localStorage.getItem('loggedInUser')
+        if(storedUser != "" && storedUser){//user is logged in
+            let emp:EmployeeInterface = JSON.parse(storedUser)
+            setLoggedInEmp(emp)
+            if(emp.role != 'manager')//User does not have permission
+                navigate("/reimbursement")
+        } else{//User is not logged in
+            setLoggedInEmp(undefined)
             navigate("/login")
         }
-
-        
-            
-
-    },[])
+    }
 
     const updateCheckbox = () => {
         setOnlyPending(!onlyPending)
-        console.log("IN Reimb")
-        console.log(loggedInEmp)
 
       };
+      const createReimbRedirect = () => {
+        navigate("/createReimb")
+
+      };
+    
     
 
     return(
@@ -55,6 +51,7 @@ export const AllReimbContainerComp:React.FC = () => {
 
             {loggedInEmp?.role == 'employee' ? 
             <>
+                <button onClick = {createReimbRedirect}>New Reimbursement</button>
                 <AllReimbsEmpComponent onlyPending ={onlyPending} emp={loggedInEmp}></AllReimbsEmpComponent>
             
             </> : <>

@@ -85,5 +85,15 @@ public class ReimbursementService {
         return rDAO.save(fullReimb);
     }
 
+    public void deleteReimbursement(int id){
+        rDAO.deleteById(id);
+    }
+
+    public Reimbursement putReimbursement(Reimbursement reimb){
+        Reimbursement fullReimb = getReimbursementById(reimb.getReimbId());
+        reimb.setEmployee(fullReimb.getEmployee());
+        return rDAO.save(reimb);
+    }
+
 
 }

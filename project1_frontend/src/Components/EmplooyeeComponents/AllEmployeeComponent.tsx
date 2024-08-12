@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react"
+
 import { Button, Table } from "react-bootstrap"
 import { EmployeeInterface } from "../../Interfaces/EmployeeInterface"
 import axios from "axios"
 import userEvent from "@testing-library/user-event"
 import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 export const AllEmployeeComponent:React.FC = () =>{
 
@@ -11,28 +12,22 @@ export const AllEmployeeComponent:React.FC = () =>{
     const [loggedInEmp, setLoggedInEmp] = useState<EmployeeInterface>()
     const navigate = useNavigate()
 
-    useEffect(()=>{//Sync state with currently stored logged in user
-        const storedUser = localStorage.getItem('loggedInUser')
-        console.log("THIS")
-        console.log(localStorage.getItem('loggedInUser'))
-        if(storedUser){
-            let emp:EmployeeInterface = JSON.parse(storedUser)
-            if(emp == null){
-                setLoggedInEmp(undefined)
-                navigate("/login")
-            }
-            else{
-                setLoggedInEmp(emp)
-                console.log("aaa" + loggedInEmp?.role)
-                if(emp.role != 'manager')
-                    navigate("/reimbursement")
-            }
-                
+    useEffect(()=>{
+        syncLoggedInUser()
+    },[])
 
-        } else{
+    const syncLoggedInUser = ()=>{//Sync state with logged in user data, and manage access 
+        const storedUser = localStorage.getItem('loggedInUser')
+        if(storedUser != "" && storedUser){//user is logged in
+            let emp:EmployeeInterface = JSON.parse(storedUser)
+            setLoggedInEmp(emp)
+            if(emp.role != 'manager')//User does not have permission
+                navigate("/reimbursement")
+        } else{//User is not logged in
+            setLoggedInEmp(undefined)
             navigate("/login")
         }
-    },[])
+    }
 
     useEffect(() =>{
         getEmployeeList()

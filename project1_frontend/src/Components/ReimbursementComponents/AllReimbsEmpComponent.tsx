@@ -2,10 +2,12 @@ import { useEffect, useState } from "react"
 import { ReimbursementInterface } from "../../Interfaces/ReimbursementInterface"
 import axios from "axios"
 import { Table } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 
 
 export const AllReimbsEmpComponent:React.FC<any> = ({onlyPending,emp}) =>{
     const [reimbursements,setReimbursements] = useState<ReimbursementInterface[]>([])
+    const navigate = useNavigate()
 
     useEffect(() =>{
         getReimbursementList()
@@ -24,14 +26,16 @@ export const AllReimbsEmpComponent:React.FC<any> = ({onlyPending,emp}) =>{
             alert(error)
             
         })
-        //window.location.reload()
         getReimbursementList()
+    }
+    const deleteButton =  async (id:number, desc:string) =>{
 
+        const confirmed = window.confirm('Are you sure you want to delete reimbursement: ' + desc + '?');
+        if(confirmed){
+            await axios.delete("http://localhost:8080/reimbursement/" + id)
+            getReimbursementList()
+        }
         
-        
-
-
-
     }
 
 
@@ -51,10 +55,16 @@ export const AllReimbsEmpComponent:React.FC<any> = ({onlyPending,emp}) =>{
                 console.log(error)
             })
             
+        }     
 
-        }
-        
+    }
 
+    const editRedirect = (index:number) =>{
+        const reimb = reimbursements[index]
+        if(reimb.status != 'PENDING')
+            alert("Can only update pending reimbursements!")
+        else
+            navigate("/editReimb",{state:{reimb}})
     }
 
     return(
@@ -68,6 +78,7 @@ export const AllReimbsEmpComponent:React.FC<any> = ({onlyPending,emp}) =>{
                         <th>Amount</th>
                         <th>Status</th>
                         <th>Owner</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,6 +89,10 @@ export const AllReimbsEmpComponent:React.FC<any> = ({onlyPending,emp}) =>{
                             <td>${reimbursement.amount}</td>
                             <td>{reimbursement.status}</td>
                             <td>{reimbursement.employee.username}</td>
+                            <td>
+                                <button onClick = {() => deleteButton(reimbursement.reimbId, reimbursement.description)}>Delete</button>
+                                <button onClick ={()=>editRedirect(index)}>Edit</button>
+                            </td>
 
                         </tr>
                     ))}
